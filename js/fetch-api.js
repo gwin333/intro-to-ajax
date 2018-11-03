@@ -25,6 +25,9 @@
   // Promises help to deal with the uncertainty inherent in making HTTP requests
   // over a network.
   //
+  //Uses a newer feature in front-end JavaScript
+  //
+  //
   // Let's see our jumbotron example using the Fetch API:
   //
 
@@ -37,9 +40,10 @@
     // In this case, the promise resolves once the AJAX request completes.
     // Promise objects can be "chained" together like below.
     console.info('Sending the AJAX request now using fetch()!')
-    fetch('jumbotron.html') // <-- fetch() returns a Promise object
+    fetch('jumbotron.html') // <-- fetch() returns a Promise object...SO IT'S ESSENTIALLY: taking the result of the fetch and then chaining the next things (the thens) to it.
       .then(extractText)
       .then(setJumbotron)
+      //.then() We can keep giving it things to do after each 'promise'
   }
 
   // The response object that is passed into this function is the result of the AJAX call above.
@@ -66,6 +70,8 @@
   // I strongly recommend naming your promise callback functions instead of using anonymous functions;
   // it greatly helps with readability and understanding code "flow".
   //
+  /* Class typing on-screen: fetch('jumbotron.html')
+        .then (function(response) {})...
   // Now let's put the fetch() API to work on something more interesting: cat pictures!
   //
   // 1) Sign up for an API key for TheCatAPI: https://thecatapi.com/
@@ -115,4 +121,31 @@
   //
   // Congratulations! You are now an AJAX master.
   //
+/* CODE HELP FROM CHRIS:
+const catAPIKey = '070ea6fd-6787-48f4-b018-942568ffb236'
+const catAPIUrl = 'https://api.thecatapi.com/v1/images/search?size=full&mime_types=jpg&format=json&has_breeds=1&order=RANDOM&page=0&limit=1'
+
+$('#generateCatBtn').click(clickCatBtn)
+
+const catAPIHeaders = new Headers({
+  'Content-Type': 'application/json',
+  'x-api-key': catAPIKey
+});
+
+function clickCatBtn () {
+  fetch(catAPIUrl, {headers: catAPIHeaders})
+    .then(extractJSON)
+    .then(receiveCatData)
+}
+
+function extractJSON (response) {
+  return response.json()
+}
+
+function receiveCatData (data) {
+  console.log('Reponse from the cat API:')
+  console.log(data)
+}
+*/
+
 })()

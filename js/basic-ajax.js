@@ -1,5 +1,6 @@
 ;(function () {
-  //
+  // local server address http://127.0.0.1:8000/#basic
+  
   // AJAX stands for Asynchronous JavaScript and XML. Despite the name, this technology
   // has little to do with XML.
   //
@@ -11,7 +12,7 @@
   // This is done via AJAX.
   //
   // The XMLHttpRequest object was the original way to use AJAX. Example below:
-  //
+  // (how to use the XMLHttpRequest object)
 
   const request = new XMLHttpRequest() // create the object
   request.addEventListener('load', receiveData) // attach a function to the 'load' event
@@ -36,7 +37,7 @@
     console.info('ajax request has completed')
 
     // now we check the original request object for it's status
-    // the line below means "is the request finished and was an HTTP 200 received?"
+    // the line below means "is the request finished and was an HTTP 200 received?" HTTP 200 means HTTP response was successful.
     if (request.readyState === 4 && request.status === 200) {
       // the .responseText property contains the raw text of the request
       // in our case, that is the HTML found in 'jumbotron.html'

@@ -8,10 +8,11 @@
   // jQuery uses the '$' symbol and puts itself on the global window object when loaded onto the page.
   // jQuery has been included on this page already for you.
   // Note that all of the following are equivalent ways of accessing the jQuery object:
-  // $
-  // window.$
-  // window['$']
-  // window.jQuery
+  //
+  // 1) $
+  // 2) window.$
+  // 3) window['$']
+  // 4) window.jQuery
   //
   // Just by reading a list of API methods you may get a sense of what jQuery can do:
   // $.get() - Load data from the server using a HTTP GET request.
@@ -33,7 +34,9 @@
     $('#loadBtn2').remove()
   }
 
-  //
+  /* $('#generateDoggoBtn')
+  $('#generateDoggoBtn').html('GeneratingDoggo...').attr('disabled','disabled') */
+
   // Pretty simple, right?
   //
   // Next up you will use jQuery AJAX methods to fetch some things from the dog.ceo website.
@@ -71,6 +74,95 @@
   //
 
   // TODO: your code goes here :)
+  // $('#generateDoggoBtn').click(clickDoggoBtn) 
+  
+  // // const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+  // $.get('https://dog.ceo/api/breeds/image/random')
+  // // console.log(randomDogURL.message)
+
+  // // var URL = randomDogURL.message
+  // // console.log(URL);
+
+  // function clickDoggoBtn () {
+  //   console.log('you clicked the doggo button! fetching the JSON now...')
+  //   $.getJSON(randomDogURL, receiveRandomDog)
+  // }
+
+  // function receiveRandomDog (data) {
+  //   console.log('receive random dog')
+  //   console.log(data)
+  //   document.createElement('img').setAttribute('src', randomDogURL)
+  //   // $('#doggoContainer').innerHTML=('<img src="" + 'randomDogURL' + img + alt="random dog photo">')
+
+  // }
+
+  const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+
+  $('#generateDoggoBtn').click(clickDoggoBtn)
+
+  function clickDoggoBtn () {
+    console.info('Generate Doggo button clicked. Fetching JSON now …')
+    $.getJSON(randomDogURL, receiveRandomDog)
+    disableDoggoBtn()
+  }
+
+  function receiveRandomDog (data) {
+    console.log('receive random dog:')
+    console.log(data.message)
+    $('<img id="randomDogURL">').appendTo('#doggoContainer')
+    $('#randomDogURL').attr('src', data.message)
+    enableDoggoBtn()
+  }
+
+  //jQuery .html() look up and read on it so that every time we click 'Generate Doggo' button, there 
+  //isn't always a new line of <img id="randomDogURL"> in the Elements tab of Inspect Element.
+
+  function enableDoggoBtn () {
+    $('#generateDoggoBtn').html('Generate Doggo').removeAttr('disabled')
+  }
+
+  function disableDoggoBtn () {
+    $('#generateDoggoBtn').html('Generating Doggo …').attr('disabled', 'disabled')
+  }
+
+
+  // Luis's code:
+  // $($.ajax({
+  //   method: "GET",
+  //   url: "https://dog.ceo/api/breeds/list ",
+  //   dataType: ""
+  // })
+  // .then(function (response){
+  //   console.log(response)
+  //   var myArray = response.message
+  //   $(myArray).each(function(){
+  //     $(document.getElementsByTagName('SELECT')[0]).append(`<option>${this}</option>`)
+  //   })
+  // }))
+
+  // $("#selectBreedContainer").append("<select></select>")
+
+  // $("#selectBreedContainer").on("click", "select", function() {
+  //   var breed = document.getElementsByTagName("select")[0].value
+  //   console.log("test")
+  //   $.get("https://dog.ceo/api/breed/" + breed + "/images/random").then(function(response){
+  //     var img = document.createElement('IMG')
+  //     document.body.appendChild(img)
+  //     document.getElementsByTagName('img')[0].setAttribute('src', response.message)
+  //   })
+  // })
+
+  /*Sarah's code: 
+    function receiveRandomDog (data) {
+    console.log('receive random dog:')
+    console.log(data)
+    var randomDogUrl = data.message
+    console.log(data.message)
+    $('<img id="randomdog">').appendTo('#doggoContainer')
+    ('#randomdog').attr('src', data.message)
+    changeBtnBack()
+  }
+  */ 
 
   //
   // Cool. Now let's kick it up a notch and allow selecting a specific breed of dog!
@@ -115,4 +207,29 @@
   //
   // Next let's look at a new contender that is built into modern browsers: the Fetch API
   //
+
+  /* CODE HELP FROM CHRIS:
+    const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+
+  $('#generateDoggoBtn').click(clickDoggoBtn)
+
+  function clickDoggoBtn () {
+    console.info('Generate Doggo button clicked. Fetching JSON now …')
+    $.getJSON(randomDogURL, receiveRandomDog)
+    disableDoggoBtn()
+  }
+
+  function receiveRandomDog (data) {
+    console.log('receive random dog:')
+    console.log(data)
+    enableDoggoBtn()
+  }
+
+  function enableDoggoBtn () {
+    $('#generateDoggoBtn').html('Generate Doggo').removeAttr('disabled')
+  }
+
+  function disableDoggoBtn () {
+    $('#generateDoggoBtn').html('Generating Doggo …').attr('disabled', 'disabled')
+    */
 })()
